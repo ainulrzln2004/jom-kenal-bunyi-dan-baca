@@ -1,0 +1,10 @@
+Pujian jawapan betul
+Sebut dengan nada gembira dan bersemangat. Setiap fail satu perkataan sahaja.
+
+Letakkan fail .wav (atau .mp3) di folder ini dengan nama tepat seperti berikut:
+
+yeay.wav   ->  sebut: Yeay!
+tahniah.wav   ->  sebut: Tahniah!
+bagus.wav   ->  sebut: Bagus!
+hebat.wav   ->  sebut: Hebat!
+terbaik.wav   ->  sebut: Terbaik!
