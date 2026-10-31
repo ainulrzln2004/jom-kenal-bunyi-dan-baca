@@ -1,0 +1,10 @@
+Ayat mudah (Aktiviti 4)
+Baca ayat dengan intonasi ceria dan tidak terlalu laju.
+
+Letakkan fail .wav (atau .mp3) di folder ini dengan nama tepat seperti berikut:
+
+ini-baju-ali.wav   ->  sebut: Ini baju Ali.
+ibu-baca-buku.wav   ->  sebut: Ibu baca buku.
+ali-ada-bola.wav   ->  sebut: Ali ada bola.
+ini-kaki-saya.wav   ->  sebut: Ini kaki saya.
+adik-minum-susu.wav   ->  sebut: Adik minum susu.

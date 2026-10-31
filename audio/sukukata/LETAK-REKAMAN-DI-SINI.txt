@@ -1,0 +1,14 @@
+Suku kata (Aktiviti 2)
+Sebut satu suku kata dengan jelas, contoh "ba".
+
+Letakkan fail .wav (atau .mp3) di folder ini dengan nama tepat seperti berikut:
+
+ba.wav   ->  sebut: ba
+ju.wav   ->  sebut: ju
+bu.wav   ->  sebut: bu
+ku.wav   ->  sebut: ku
+bo.wav   ->  sebut: bo
+la.wav   ->  sebut: la
+ka.wav   ->  sebut: ka
+ki.wav   ->  sebut: ki
+su.wav   ->  sebut: su

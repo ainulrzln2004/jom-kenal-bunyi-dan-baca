@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Studio Rakaman Jom Kenal Bunyi dan Baca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#3b2f4a;--ink-soft:#6b5b7b;--bg:#fff4fa;--line:#eadcf6;--pink:#ff9ec4;--sky:#8fd3ff;--mint:#9fe8c3;--sun:#ffd86b;--lav:#cdbcff;--good:#1b8f55;--bad:#d6336c;--shadow:rgba(59,47,74,.22);
+ --f-display:'Baloo 2','Trebuchet MS',system-ui,sans-serif;--f-body:'Nunito','Trebuchet MS',system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:var(--f-body);font-weight:700;color:var(--ink);background:var(--bg);padding:0 max(16px,env(safe-area-inset-left,0px)) 40px}
+button,label.b{font:inherit;cursor:pointer}
+.wrap{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:14px;padding-top:14px}
+h1{font-family:var(--f-display);font-size:clamp(1.7rem,6vw,2.6rem);line-height:1.05;margin:0}
+h2{font-family:var(--f-display);font-size:1.3rem;margin:0}
+p{margin:0}
+.box{background:#fff;border:4px solid var(--line);border-radius:22px;padding:14px 16px}
+ol,ul{margin:6px 0 0;padding-left:1.3em;display:flex;flex-direction:column;gap:4px}
+.btn{font-family:var(--f-display);font-weight:800;font-size:1.05rem;border:0;border-radius:14px;background:var(--sun);color:var(--ink);padding:9px 14px;min-height:44px;box-shadow:0 4px 0 var(--shadow);display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--shadow)}
+.btn:focus-visible,summary:focus-visible{outline:4px solid #7a5cff;outline-offset:2px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.rec{background:var(--pink)} .btn.stop{background:var(--bad);color:#fff} .btn.go{background:var(--mint)} .btn.sky{background:var(--sky)} .btn.lav{background:var(--lav)} .btn.plain{background:#fff;border:3px solid var(--line)}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-bottom:3px solid var(--line)}
+.prog{flex:1;min-width:170px}
+.pbar{height:16px;background:#fff;border:3px solid var(--line);border-radius:10px;overflow:hidden;margin-top:4px}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--sun));transition:width .3s}
+details.g{background:#fff;border:4px solid var(--line);border-radius:22px;padding:10px 14px}
+details.g>summary{cursor:pointer;font-family:var(--f-display);font-size:1.3rem}
+.cnt{font-size:.95rem;color:var(--ink-soft);margin-left:6px}
+.hint{color:var(--ink-soft);font-size:.95rem;margin:6px 0 4px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:10px 0;border-top:2px dashed var(--line)}
+.row .say{font-family:var(--f-display);font-size:1.35rem;line-height:1.15;overflow-wrap:anywhere}
+.row .meta{font-size:.85rem;color:var(--ink-soft);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row .meta code{word-break:break-all}
+.ok{color:var(--good)} .todo{color:#c2410c}
+.row .acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.row.live{background:#fff0f6;border-radius:14px;padding-left:8px;padding-right:8px}
+.lvl{height:10px;width:100%;background:var(--line);border-radius:6px;overflow:hidden;grid-column:1/-1}
+.lvl i{display:block;height:100%;width:0;background:var(--bad)}
+.err{color:var(--bad)}
+@media (max-width:560px){.row{grid-template-columns:1fr}.row .acts{justify-content:flex-start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎙️ Studio Rakaman Suara</h1>
+  <p>Alat percuma untuk merakam suara anda sendiri bagi permainan <b>Jom Kenal Bunyi dan Baca!</b> Rakaman disimpan sebagai fail .wav dengan nama yang tepat, sedia untuk dimuat naik ke folder <code>audio/</code> di GitHub.</p>
+
+  <div class="box">
+    <h2>Cara guna</h2>
+    <ol>
+      <li>Tekan <b>● Rakam</b> pada satu baris, benarkan mikrofon, sebut perkataan yang tertera, kemudian tekan <b>■ Henti</b>.</li>
+      <li>Tekan <b>▶</b> untuk mendengar. Tidak puas hati? Rakam semula, rakaman lama akan diganti.</li>
+      <li>Senyap di awal dan akhir dibuang secara automatik, dan kelantangan diseragamkan.</li>
+      <li>Apabila siap, tekan <b>Muat turun semua (ZIP)</b>. Ekstrak ZIP, dan muat naik folder <code>audio</code> ke akar repositori GitHub anda.</li>
+    </ol>
+    <p class="hint">Petua: rakam di bilik senyap, jarak mulut sekitar satu jengkal dari mikrofon, nada ceria dan mesra untuk kanak-kanak. Sebut hanya perkataan yang tertera. Rakaman disimpan dalam pelayar ini, jadi anda boleh sambung kemudian di komputer yang sama.</p>
+  </div>
+
+  <div class="bar">
+    <div class="prog"><b id="ptxt">0 daripada 0 siap</b><div class="pbar"><i id="pfill"></i></div></div>
+    <button class="btn go" id="zipBtn" disabled>⬇ Muat turun semua (ZIP)</button>
+  </div>
+  <p id="msg" class="err" role="status" hidden></p>
+  <div id="groups" class="wrap" style="padding:0"></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* ===== DATA (sama dalam index.html dan record.html) ===== */
+/* Nama huruf piawai Bahasa Melayu (bukan bunyi suku kata): B = "bi", K = "ke", S = "es" ... */
+var LETTERS={
+  b:{name:'bi',w:'bola',e:'⚽'}, k:{name:'ke',w:'kaki',e:'🦶'}, s:{name:'es',w:'susu',e:'🥛'},
+  m:{name:'em',w:'mata',e:'👀'}, l:{name:'el',w:'lampu',e:'💡'}, j:{name:'je',w:'jam',e:'⏰'},
+  t:{name:'ti',w:'topi',e:'🧢'}, p:{name:'pi',w:'pen',e:'🖊️'}
+};
+var WORDS={
+  baju:{e:'👕',syl:['ba','ju']}, buku:{e:'📖',syl:['bu','ku']}, bola:{e:'⚽',syl:['bo','la']},
+  kaki:{e:'🦶',syl:['ka','ki']}, susu:{e:'🥛',syl:['su','su']}
+};
+var EXTRA_WORDS=['ini','ali','ibu','baca','ada','saya','adik','minum'];
+var SENT=[
+  {t:'Ini baju Ali.',key:'baju',scene:'👕'},
+  {t:'Ibu baca buku.',key:'buku',scene:'👩📖'},
+  {t:'Ali ada bola.',key:'bola',scene:'👦⚽'},
+  {t:'Ini kaki saya.',key:'kaki',scene:'🦶'},
+  {t:'Adik minum susu.',key:'susu',scene:'👶🥛'}
+];
+var PRAISE=[
+  {id:'yeay',text:'Yeay!',emoji:'🎉'},{id:'tahniah',text:'Tahniah!',emoji:'🏆'},
+  {id:'bagus',text:'Bagus!',emoji:'⭐'},{id:'hebat',text:'Hebat!',emoji:'🌟'},{id:'terbaik',text:'Terbaik!',emoji:'💖'}
+];
+var ENC=[
+  {id:'tak-apa-cuba-lagi',text:'Tak apa, cuba lagi! 💪',say:'Tak apa, cuba lagi!'},
+  {id:'hampir-berjaya',text:'Kamu hampir berjaya!',say:'Kamu hampir berjaya!'},
+  {id:'jom-cuba-lagi',text:'Jom cuba sekali lagi!',say:'Jom cuba sekali lagi!'},
+  {id:'perhatikan-jawapan',text:'Perhatikan jawapan dengan teliti.',say:'Perhatikan jawapan dengan teliti.'}
+];
+var TIERS=[
+  {min:13,k:'v:luarbiasa',f:'mesej-luarbiasa',t:'Luar biasa! Kamu bintang sebenar!'},
+  {min:9,k:'v:bagus',f:'mesej-bagus',t:'Bagus sekali! Kamu semakin pandai membaca!'},
+  {min:0,k:'v:syabas',f:'mesej-syabas',t:'Syabas! Setiap latihan membuat kamu lebih pandai!'}
+];
+function slug(t){return t.toLowerCase().replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-');}
+SENT.forEach(function(s){s.id=slug(s.t);});
+
+/* ===== SENARAI KLIP AUDIO: satu klip = satu fail dalam folder audio/ ===== */
+var CLIPS={},GROUPS=[];
+function grp(id,title,hint){var g={id:id,title:title,hint:hint,keys:[]};GROUPS.push(g);return g;}
+function clip(g,key,file,say,label,prompt){CLIPS[key]={file:'audio/'+g.id+'/'+file,say:say,label:label,prompt:prompt||say,g:g.id};g.keys.push(key);}
+(function(){
+  var g=grp('huruf','Nama huruf (Aktiviti 1)','Sebut NAMA huruf, bukan suku kata. Contoh: B dibaca "bi", bukan "ba".');
+  Object.keys(LETTERS).forEach(function(l){clip(g,'h:'+l,l,LETTERS[l].name,'Huruf '+l.toUpperCase(),LETTERS[l].name);});
+  g=grp('sukukata','Suku kata (Aktiviti 2)','Sebut satu suku kata dengan jelas, contoh "ba".');
+  var seen={};
+  Object.keys(WORDS).forEach(function(w){WORDS[w].syl.forEach(function(s){if(!seen[s]){seen[s]=1;clip(g,'s:'+s,s,s,s);}});});
+  g=grp('perkataan','Perkataan (Aktiviti 2, 3 dan 4)','Sebut satu perkataan dengan perlahan dan jelas.');
+  Object.keys(WORDS).concat(EXTRA_WORDS).forEach(function(w){clip(g,'w:'+w,w,w,w);});
+  g=grp('ayat','Ayat mudah (Aktiviti 4)','Baca ayat dengan intonasi ceria dan tidak terlalu laju.');
+  SENT.forEach(function(s){clip(g,'t:'+s.id,s.id,s.t,s.t);});
+  g=grp('puji','Pujian jawapan betul','Sebut dengan nada gembira dan bersemangat. Setiap fail satu perkataan sahaja.');
+  PRAISE.forEach(function(p){clip(g,'p:'+p.id,p.id,p.text,p.text);});
+  g=grp('kemenangan','Skrin kemenangan','Sebut dengan nada paling meriah.');
+  clip(g,'v:tahniah','tahniah-kamu-berjaya','Yeay! Tahniah! Kamu berjaya!','Tahniah, kamu berjaya');
+  TIERS.forEach(function(t){clip(g,t.k,t.f,t.t,t.t);});
+  g=grp('galakan','Galakan jawapan salah','Sebut dengan lembut dan mesra. Jangan bernada marah atau kecewa.');
+  ENC.forEach(function(e){clip(g,'g:'+e.id,e.id,e.say,e.say);});
+})();
+
+var $=function(s,r){return (r||document).querySelector(s);};
+var rec={};            // key -> {blob,url,dur}
+var cur=null;          // rakaman semasa {key,mr,stream,chunks,ctx,raf}
+var playing=null;
+
+/* ---------- simpanan dalam pelayar (IndexedDB) ---------- */
+function idb(){return new Promise(function(res,rej){try{var r=indexedDB.open('jkbb-rec',1);r.onupgradeneeded=function(){r.result.createObjectStore('w');};r.onsuccess=function(){res(r.result);};r.onerror=function(){rej(r.error);};}catch(e){rej(e);}});}
+function dbPut(k,v){return idb().then(function(d){return new Promise(function(res,rej){var t=d.transaction('w','readwrite');t.objectStore('w').put(v,k);t.oncomplete=res;t.onerror=function(){rej(t.error);};});}).catch(function(){});}
+function dbDel(k){return idb().then(function(d){return new Promise(function(res,rej){var t=d.transaction('w','readwrite');t.objectStore('w').delete(k);t.oncomplete=res;t.onerror=function(){rej(t.error);};});}).catch(function(){});}
+function dbAll(){return idb().then(function(d){return new Promise(function(res){var out={},q=d.transaction('w','readonly').objectStore('w').openCursor();q.onsuccess=function(){var c=q.result;if(c){out[c.key]=c.value;c.continue();}else res(out);};q.onerror=function(){res(out);};});}).catch(function(){return {};});}
+
+/* ---------- tukar apa-apa audio kepada WAV mono 24 kHz ---------- */
+function decode(c,ab){return new Promise(function(res,rej){var p=c.decodeAudioData(ab,res,rej);if(p&&p.then)p.then(res,rej);});}
+function toWav(ab){
+  var AC=window.AudioContext||window.webkitAudioContext,c=new AC();
+  return decode(c,ab).then(function(buf){
+    try{c.close();}catch(e){}
+    var n=buf.length,ch=buf.numberOfChannels,mono=new Float32Array(n),i,k;
+    for(k=0;k<ch;k++){var d=buf.getChannelData(k);for(i=0;i<n;i++)mono[i]+=d[i]/ch;}
+    var th=.02,s=0,e=n-1;
+    while(s<n&&Math.abs(mono[s])<th)s++;
+    while(e>s&&Math.abs(mono[e])<th)e--;
+    if(e-s<buf.sampleRate*.08)throw new Error('Tiada suara dikesan. Cuba rakam lebih dekat dengan mikrofon.');
+    var pad=Math.floor(buf.sampleRate*.08);s=Math.max(0,s-pad);e=Math.min(n-1,e+pad);
+    mono=mono.subarray(s,e+1);
+    var rate=24000,len=Math.max(1,Math.ceil(mono.length*rate/buf.sampleRate));
+    var OC=window.OfflineAudioContext||window.webkitOfflineAudioContext,oc=new OC(1,len,rate);
+    var b=oc.createBuffer(1,mono.length,buf.sampleRate);b.getChannelData(0).set(mono);
+    var src=oc.createBufferSource();src.buffer=b;src.connect(oc.destination);src.start(0);
+    return new Promise(function(res,rej){var p=oc.startRendering();if(p&&p.then)p.then(res,rej);oc.oncomplete=function(ev){res(ev.renderedBuffer);};});
+  }).then(function(rb){
+    var x=rb.getChannelData(0),peak=0,i;
+    for(i=0;i<x.length;i++){var a=Math.abs(x[i]);if(a>peak)peak=a;}
+    var g=peak>0?.9/peak:1,out=new DataView(new ArrayBuffer(44+x.length*2));
+    function str(o,t){for(var j=0;j<t.length;j++)out.setUint8(o+j,t.charCodeAt(j));}
+    str(0,'RIFF');out.setUint32(4,36+x.length*2,true);str(8,'WAVE');str(12,'fmt ');out.setUint32(16,16,true);out.setUint16(20,1,true);out.setUint16(22,1,true);
+    out.setUint32(24,24000,true);out.setUint32(28,48000,true);out.setUint16(32,2,true);out.setUint16(34,16,true);str(36,'data');out.setUint32(40,x.length*2,true);
+    for(i=0;i<x.length;i++){var v=Math.max(-1,Math.min(1,x[i]*g));out.setInt16(44+i*2,v<0?v*32768:v*32767,true);}
+    return {blob:new Blob([out.buffer],{type:'audio/wav'}),dur:x.length/24000};
+  });
+}
+
+/* ---------- ZIP (tanpa mampatan) ---------- */
+var CRC=(function(){var t=[],c,n,k;for(n=0;n<256;n++){c=n;for(k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+function crc32(u){var c=0xFFFFFFFF;for(var i=0;i<u.length;i++)c=CRC[(c^u[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function makeZip(files){
+  var parts=[],central=[],offset=0,enc=new TextEncoder();
+  files.forEach(function(f){
+    var name=enc.encode(f.name),crc=crc32(f.data),size=f.data.length;
+    var h=new DataView(new ArrayBuffer(30));
+    h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint16(12,0x21,true);
+    h.setUint32(14,crc,true);h.setUint32(18,size,true);h.setUint32(22,size,true);h.setUint16(26,name.length,true);
+    parts.push(h.buffer,name,f.data);
+    var c=new DataView(new ArrayBuffer(46));
+    c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint16(8,0x0800,true);c.setUint16(14,0x21,true);
+    c.setUint32(16,crc,true);c.setUint32(20,size,true);c.setUint32(24,size,true);c.setUint16(28,name.length,true);c.setUint32(42,offset,true);
+    central.push(c.buffer,name);
+    offset+=30+name.length+size;
+  });
+  var csize=0;central.forEach(function(p){csize+=p.byteLength!==undefined?p.byteLength:p.length;});
+  var e=new DataView(new ArrayBuffer(22));
+  e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,csize,true);e.setUint32(16,offset,true);
+  return new Blob(parts.concat(central,[e.buffer]),{type:'application/zip'});
+}
+function download(blob,name){
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(function(){a.remove();URL.revokeObjectURL(a.href);},2000);
+}
+
+/* ---------- paparan ---------- */
+function msg(t){var m=$('#msg');m.textContent=t||'';m.hidden=!t;}
+function fmt(d){return d.toFixed(1)+' s';}
+function build(){
+  var h='';
+  GROUPS.forEach(function(g,gi){
+    h+='<details class="g"'+(gi===0?' open':'')+'><summary>'+g.title+'<span class="cnt" data-g="'+g.id+'"></span></summary><p class="hint">'+g.hint+'</p>';
+    g.keys.forEach(function(k){
+      var c=CLIPS[k];
+      h+='<div class="row" data-k="'+k+'"><div><div class="say">“'+c.prompt+'”</div><div class="meta"><span class="st todo">Belum dirakam</span><code>'+c.file+'.wav</code></div></div>'+
+        '<div class="acts"><button class="btn rec" data-a="rec">● Rakam</button><button class="btn lav" data-a="play" disabled aria-label="Dengar">▶</button>'+
+        '<button class="btn sky" data-a="save" disabled aria-label="Muat turun fail ini">⬇</button>'+
+        '<label class="btn plain b" title="Ambil fail audio sedia ada">Fail…<input type="file" accept="audio/*" data-a="imp" hidden></label>'+
+        '<button class="btn plain" data-a="del" disabled aria-label="Padam rakaman">✕</button></div></div>';
+    });
+    h+='</details>';
+  });
+  $('#groups').innerHTML=h;
+}
+function row(k){return $('.row[data-k="'+k+'"]');}
+function refresh(k){
+  var r=row(k),has=!!rec[k];
+  r.querySelector('.st').textContent=has?'✔ siap ('+fmt(rec[k].dur)+')':'Belum dirakam';
+  r.querySelector('.st').className='st '+(has?'ok':'todo');
+  ['play','save','del'].forEach(function(a){r.querySelector('[data-a="'+a+'"]').disabled=!has;});
+  var all=Object.keys(CLIPS),done=all.filter(function(x){return rec[x];}).length;
+  $('#ptxt').textContent=done+' daripada '+all.length+' siap';
+  $('#pfill').style.width=(done/all.length*100)+'%';
+  $('#zipBtn').disabled=!done;
+  GROUPS.forEach(function(g){var c=$('[data-g="'+g.id+'"]');c.textContent=g.keys.filter(function(x){return rec[x];}).length+'/'+g.keys.length;});
+}
+function setRec(k,res){
+  if(rec[k]&&rec[k].url)URL.revokeObjectURL(rec[k].url);
+  rec[k]={blob:res.blob,dur:res.dur,url:URL.createObjectURL(res.blob)};
+  dbPut(k,res.blob);refresh(k);
+}
+
+/* ---------- rakam ---------- */
+function stopStream(){
+  if(!cur)return;
+  cancelAnimationFrame(cur.raf);
+  try{cur.stream.getTracks().forEach(function(t){t.stop();});}catch(e){}
+  try{cur.ctx.close();}catch(e){}
+}
+function startRec(k){
+  msg('');
+  if(!navigator.mediaDevices||!window.MediaRecorder){msg('Pelayar ini tidak menyokong rakaman. Gunakan Chrome, Edge atau Safari terkini melalui https.');return;}
+  navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,channelCount:1}}).then(function(stream){
+    var types=['audio/webm;codecs=opus','audio/mp4','audio/webm'],mt='';
+    for(var i=0;i<types.length;i++){if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(types[i])){mt=types[i];break;}}
+    var mr=mt?new MediaRecorder(stream,{mimeType:mt}):new MediaRecorder(stream),chunks=[];
+    var AC=window.AudioContext||window.webkitAudioContext,ctx=new AC(),an=ctx.createAnalyser(),data=new Uint8Array(256);
+    an.fftSize=512;ctx.createMediaStreamSource(stream).connect(an);
+    var r=row(k),lv=document.createElement('div');lv.className='lvl';lv.innerHTML='<i></i>';r.appendChild(lv);r.classList.add('live');
+    cur={key:k,mr:mr,stream:stream,ctx:ctx,chunks:chunks,raf:0,lv:lv};
+    (function tick(){an.getByteTimeDomainData(data);var m=0;for(var j=0;j<data.length;j++)m=Math.max(m,Math.abs(data[j]-128));lv.firstChild.style.width=Math.min(100,m/90*100)+'%';cur.raf=requestAnimationFrame(tick);})();
+    mr.ondataavailable=function(e){if(e.data&&e.data.size)chunks.push(e.data);};
+    mr.onstop=function(){
+      var done=cur;stopStream();r.classList.remove('live');lv.remove();cur=null;uiRec(k,false);
+      var blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'});
+      blob.arrayBuffer().then(toWav).then(function(res){setRec(k,res);msg('');}).catch(function(e){msg(e&&e.message?e.message:'Rakaman gagal diproses. Cuba lagi.');});
+    };
+    mr.start();uiRec(k,true);
+  }).catch(function(){msg('Mikrofon tidak dapat digunakan. Benarkan akses mikrofon pada pelayar, kemudian cuba lagi.');});
+}
+function uiRec(k,on){
+  var b=row(k).querySelector('[data-a="rec"]');
+  b.textContent=on?'■ Henti':'● Rakam';b.classList.toggle('stop',on);b.classList.toggle('rec',!on);
+  Array.prototype.forEach.call(document.querySelectorAll('[data-a="rec"]'),function(x){if(x!==b)x.disabled=on;});
+}
+function toggleRec(k){
+  if(cur&&cur.key===k){try{cur.mr.stop();}catch(e){}return;}
+  if(cur)return;
+  startRec(k);
+}
+
+document.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-a]');if(!t||t.tagName==='INPUT')return;
+  var r=t.closest('.row');if(!r)return;
+  var k=r.dataset.k,a=t.dataset.a;
+  if(a==='rec')toggleRec(k);
+  else if(a==='play'&&rec[k]){if(playing){playing.pause();}playing=new Audio(rec[k].url);playing.play().catch(function(){});}
+  else if(a==='save'&&rec[k])download(rec[k].blob,CLIPS[k].file.split('/').pop()+'.wav');
+  else if(a==='del'&&rec[k]){URL.revokeObjectURL(rec[k].url);delete rec[k];dbDel(k);refresh(k);}
+});
+document.addEventListener('change',function(ev){
+  var t=ev.target;if(!t.matches||!t.matches('[data-a="imp"]'))return;
+  var f=t.files&&t.files[0],k=t.closest('.row').dataset.k;if(!f)return;
+  msg('');f.arrayBuffer().then(toWav).then(function(res){setRec(k,res);}).catch(function(e){msg(e&&e.message?e.message:'Fail audio ini tidak dapat dibaca.');});
+  t.value='';
+});
+$('#zipBtn').onclick=function(){
+  var keys=Object.keys(CLIPS).filter(function(k){return rec[k];});
+  Promise.all(keys.map(function(k){return rec[k].blob.arrayBuffer().then(function(ab){return {name:CLIPS[k].file+'.wav',data:new Uint8Array(ab)};});})).then(function(files){
+    download(makeZip(files),'audio-jom-kenal-bunyi.zip');
+  });
+};
+
+build();
+Object.keys(CLIPS).forEach(function(k){refresh(k);});
+dbAll().then(function(all){
+  Object.keys(all).forEach(function(k){if(CLIPS[k]){rec[k]={blob:all[k],url:URL.createObjectURL(all[k]),dur:Math.max(.1,(all[k].size-44)/48000)};refresh(k);}});
+});
+window.__rec={rec:rec,toWav:toWav,makeZip:makeZip,CLIPS:CLIPS};
+})();
+</script>
+</body>
+</html>
