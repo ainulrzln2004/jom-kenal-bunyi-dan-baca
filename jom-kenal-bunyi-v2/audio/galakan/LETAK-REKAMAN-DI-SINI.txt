@@ -1,9 +1,0 @@
-Galakan jawapan salah
-Sebut dengan lembut dan mesra. Jangan bernada marah atau kecewa.
-
-Letakkan fail .wav (atau .mp3) di folder ini dengan nama tepat seperti berikut:
-
-tak-apa-cuba-lagi.wav   ->  sebut: Tak apa, cuba lagi!
-hampir-berjaya.wav   ->  sebut: Kamu hampir berjaya!
-jom-cuba-lagi.wav   ->  sebut: Jom cuba sekali lagi!
-perhatikan-jawapan.wav   ->  sebut: Perhatikan jawapan dengan teliti.

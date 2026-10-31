@@ -1,9 +1,0 @@
-Skrin kemenangan
-Sebut dengan nada paling meriah.
-
-Letakkan fail .wav (atau .mp3) di folder ini dengan nama tepat seperti berikut:
-
-tahniah-kamu-berjaya.wav   ->  sebut: Yeay! Tahniah! Kamu berjaya!
-mesej-luarbiasa.wav   ->  sebut: Luar biasa! Kamu bintang sebenar!
-mesej-bagus.wav   ->  sebut: Bagus sekali! Kamu semakin pandai membaca!
-mesej-syabas.wav   ->  sebut: Syabas! Setiap latihan membuat kamu lebih pandai!
